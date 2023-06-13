@@ -1,26 +1,37 @@
 
 import React from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 //Fonksiyonel component
 export default function Navbar() {
     return (
-        <ThemeContext.Consumer>{(context) => {
-            const { isLightTheme, dark, light } = context;
-            const theme = isLightTheme ? light : dark;
+        <AuthContext.Consumer>
+            {(authContext) => (
+                <ThemeContext.Consumer>{(context) => {
+                    const {isAuthenticated,toggleAuth} =authContext;
+                    const { isLightTheme, dark, light } = context;
+                    const theme = isLightTheme ? light : dark;
 
-            return (
-                <nav style={{ background: theme.ui, color: theme.syntax }} >
-                    <h1>AOS App</h1>
-                    <ul>
-                        <li>Anasayfa</li>
-                        <li>Hakkımızda</li>
-                        <li>İletişim</li>
-                    </ul>
-                </nav>
+                    return (
+                        <nav style={{ background: theme.ui, color: theme.syntax }} >
+                            <h1>AOS App</h1>
+                            <div onClick={toggleAuth} >
+                                {isAuthenticated?"Çıkış Yap":"Giriş Yap"}
+                            </div>
+                            <ul>
+                                <li>Anasayfa</li>
+                                <li>Hakkımızda</li>
+                                <li>İletişim</li>
+                            </ul>
+                        </nav>
+                    )
+                }}
+                </ThemeContext.Consumer>
             )
-        }}
-        </ThemeContext.Consumer>
+            }
+        </AuthContext.Consumer>
+
     );
 };
 
