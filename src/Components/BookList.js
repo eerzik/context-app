@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
-class BookList extends Component {
 
-    static contextType = ThemeContext;
 
-    render() {
-        const { isLightTheme, dark, light } = this.context;
+
+const BookList =()=> {
+
+        const { isLightTheme, dark, light } = useContext(ThemeContext)
         const theme = isLightTheme ? light : dark;
 
         return (
@@ -18,7 +18,7 @@ class BookList extends Component {
                 </ul>
             </div>
         );
-    }
+
 }
 
 export default BookList;
