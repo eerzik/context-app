@@ -1,9 +1,13 @@
+import BookList from "./Components/BookList";
+import Navbar from "./Components/Navbar";
 
 
 function App() {
   return (
     <div className="App">
-      Merhaba Context API
+      <Navbar />
+      <BookList />
+
     </div>
   );
 }
